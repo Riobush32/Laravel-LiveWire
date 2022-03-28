@@ -1,13 +1,18 @@
 <div>
 
     @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-        
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+
     @endif
 
-    <livewire:contact-create></livewire:contact-create>
+    @if ($statusUpdate)
+        <livewire:contact-update/>
+    @else
+        <livewire:contact-create/>
+    @endif
+
 
     <hr>
 
@@ -23,16 +28,17 @@
         <tbody>
             <?php $no = 0; ?>
             @foreach ($contacts as $contact)
-                <?php $no++; ?>
-                <tr>
-                    <th scope="row">{{ $no }}</th>
-                    <th>{{ $contact->name }}</th>
-                    <td>{{ $contact->phone }}</td>
-                    <td>
-                        <button class="btn btn-sm btn-info text-white">Edit</button>
-                        <button class="btn btn-sm btn-danger text-white">Delete</button>
-                    </td>
-                </tr>
+            <?php $no++; ?>
+            <tr>
+                <th scope="row">{{ $no }}</th>
+                <th>{{ $contact->name }}</th>
+                <td>{{ $contact->phone }}</td>
+                <td>
+                    <button wire:click="getContact({{ $contact->id }})"
+                        class="btn btn-sm btn-info text-white">Edit</button>
+                    <button class="btn btn-sm btn-danger text-white">Delete</button>
+                </td>
+            </tr>
             @endforeach
 
         </tbody>
