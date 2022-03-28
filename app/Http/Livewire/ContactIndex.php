@@ -10,7 +10,8 @@ class ContactIndex extends Component
     public $statusUpdate = false;
 
     protected $listeners = [
-        'contactStore' => 'handleStore'
+        'contactStore' => 'handleStore',
+        'contactUpdated' => 'handleUpdate'
     ];
 
     public function render()
@@ -30,5 +31,10 @@ class ContactIndex extends Component
     public function handleStore($contact)
     {
         session()->flash('message', 'Contact ' . $contact['name'] . ' was stored!');
+    }
+
+    public function handleUpdate($contact)
+    {
+        session()->flash('message', 'Contact ' . $contact['name'] . ' was updated!');
     }
 }
