@@ -28,6 +28,16 @@ class ContactIndex extends Component
         $this->emit('getContact', $contact);
     }
 
+    public function destroy($id)
+    {
+        if($id)
+        {
+            $data = Contact::find($id);
+            $data->delete();
+            session()->flash('message', 'Contact was deleted!');
+        }
+    }
+
     public function handleStore($contact)
     {
         session()->flash('message', 'Contact ' . $contact['name'] . ' was stored!');
