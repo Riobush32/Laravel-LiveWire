@@ -8,11 +8,23 @@
     @endif
 
     @if ($statusUpdate)
-        <livewire:contact-update/>
+    <livewire:contact-update />
     @else
-        <livewire:contact-create/>
+    <livewire:contact-create />
     @endif
 
+
+    <hr>
+
+    <div class="row">
+        <div class="col-2">
+            <select wire:model="paginate" class="form-select">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+        </div>
+    </div>
 
     <hr>
 
@@ -36,12 +48,13 @@
                 <td>
                     <button wire:click="getContact({{ $contact->id }})"
                         class="btn btn-sm btn-info text-white">Edit</button>
-                    <button wire:click="destroy({{ $contact->id }})" class="btn btn-sm btn-danger text-white">Delete</button>
+                    <button wire:click="destroy({{ $contact->id }})"
+                        class="btn btn-sm btn-danger text-white">Delete</button>
                 </td>
             </tr>
             @endforeach
 
         </tbody>
     </table>
-    {{ $contacts->links('pagination::bootstrap-4') }}
+    {{ $contacts->links('vendor.pagination.bootstrap-5') }}
 </div>
